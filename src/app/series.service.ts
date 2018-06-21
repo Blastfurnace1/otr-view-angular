@@ -5,7 +5,11 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { Response } from './response';
 import { Series } from './series';
+import { SeriesDataWrapper } from './seriesdatawrapper';
+import { QueryParams } from './queryparams';
+
 import { TEST_SERIES } from './mock-series';
+import { HttpParams } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +20,11 @@ const httpOptions = {
 })
 export class SeriesService {
   
-  private seriesUrl = 'api/series';
+  private seriesUrl = 'http://localhost/otr-series-data/rest';
+  
+  private resultSetSize = 20;
+  
+  private page = 1;
   
   constructor(private http: HttpClient,
               private messageService: MessageService) { }
@@ -26,19 +34,55 @@ export class SeriesService {
       this.messageService.add('SeriesService: ' + message);
   }
   
-  getSeries(): Observable<Series[]> {
-    
-    return this.http.get<Series[]>(this.seriesUrl).pipe(
+  getHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return headers;
+  }
+  
+  getMoreResults():Observable<Response<Series[]>[]> {
+    this.page++;
+    this.log(this.page.toString());
+    return this.getSeries(false);
+  }
+  
+  oldgetQueryParams(): HttpParams {
+    let params = new HttpParams();
+    params.set("page", this.page.toString());
+    params.set("size", this.resultSetSize.toString());
+    params.set("sort", "title");
+    params.set("sortAscending", "false");
+    params.set("joinAnd", "true");
+    return params;
+  }
+  
+  getQueryParams(): string {
+    let params = "?page=" + this.page.toString() +
+    "&size=" + this.resultSetSize.toString() +
+    "&sort=title" +
+    "&sortAscending=false" +
+    "&joinAnd=true";
+    return params;
+  }
+  
+  getSeries(restart:boolean): Observable<Response<Series[]>[]> {
+    if (restart) {
+      this.page = 1;
+    }
+    let params = this.getQueryParams();
+    let headers = this.getHeaders();
+    this.log(this.seriesUrl+params);
+    return this.http.get<Response<Series[]>[]>(this.seriesUrl+params, {headers:headers}).pipe(
       tap(series => this.log(`fetched series`)),
       catchError(this.handleError('getSeries', []))
     );
   }
   
-  getSer(id: number): Observable<Series> {
-    const url = `${this.seriesUrl}/${id}`;
-    return this.http.get<Series>(url).pipe(
-      tap(_ => this.log(`fetched Series id=${id}`)),
-      catchError(this.handleError<Series>(`getSer id=${id}`))
+  getSer(id: number): Observable<Response<SeriesDataWrapper>> {
+    const url = `${this.seriesUrl}/get/${id}`;
+    return this.http.get<Response<SeriesDataWrapper>>(url).pipe(
+      tap(_ => this.log(`fetched Series id=${id} using ` + url)),
+      catchError(this.handleError<Response<SeriesDataWrapper>>(`getSer id=${id} using ` + url))
     );
   }
       

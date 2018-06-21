@@ -24,7 +24,12 @@ export class SeriesComponent implements OnInit {
   
   getSeries(): void {
     // observable
-    this.seriesService.getSeries().subscribe(series => this.series = series);
+    this.seriesService.getSeries(true).subscribe(series => this.series = series[0].payload);
+    
+  }
+  
+  getMoreResults(): void {
+    this.seriesService.getMoreResults().subscribe(series => this.series = this.series.concat(series[0].payload));
   }
   
   goBack(): void {

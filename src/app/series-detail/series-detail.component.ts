@@ -6,6 +6,8 @@ import { SeriesService }  from '../series.service';
 
 import { Series } from '../series';
 
+import { SeriesDataWrapper } from '../seriesdatawrapper';
+
 @Component({
   selector: 'app-series-detail',
   templateUrl: './series-detail.component.html',
@@ -28,7 +30,7 @@ export class SeriesDetailComponent implements OnInit {
   getSeries(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.seriesService.getSer(id)
-    .subscribe(ser => this.seriesData = ser);
+    .subscribe(seriesData => this.seriesData = seriesData.payload.series);
   }
   
   save(): void {

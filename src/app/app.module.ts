@@ -11,8 +11,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AppRoutingModule } from './/app-routing.module';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
 import { SeriesSearchComponent } from './series-search/series-search.component';
 
 @NgModule({
@@ -27,14 +25,8 @@ import { SeriesSearchComponent } from './series-search/series-search.component';
   imports: [HttpClientModule,
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
-    
-  // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-  // and returns simulated server responses.
-  // Remove it when a real server is ready to receive requests.
-  HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false }
-)
+    AppRoutingModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
