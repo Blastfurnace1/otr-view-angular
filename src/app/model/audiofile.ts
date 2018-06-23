@@ -1,0 +1,41 @@
+export class AudioFile {
+  
+  id:number;
+  discId:string;
+  directory:string;
+  filename:string;
+  fileType:string;
+  bitrate:number;
+  audioSamplingRate:number;
+  audioChannels:number;
+  duration:number;
+  preciseDuration:number;
+  fileLength:number;
+  zipped:number;
+  zipFile:string;
+  audioFile:number;
+  encodingType:string;
+  extraEncodeInfo:string;
+  variableBitrate:number;
+  seriesId:number;
+  episodeId:number;
+  sourceId:number;
+  description:string;
+  rating:number;
+  heard:number;
+  audioQuality:number;
+  encodingQuality:number;
+  mediaId:number;
+  genre:string;
+  title:string;
+  trackNo:string;
+  year:string;
+  album:string;
+  artist:string;
+  comment:string;
+  indexed:number;
+  seriesName:string;
+  episodeName:string;
+  episodeNumber:number;
+  broadcastDate:string;
+}

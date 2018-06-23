@@ -1,6 +1,6 @@
     import { Component, OnInit } from '@angular/core';
-    import { Series } from '../series';
-    import { SeriesService } from '../series.service';
+    import { Series } from '../model/series';
+    import { SeriesService } from '../service/series.service';
      
     @Component({
       selector: 'app-dashboard',

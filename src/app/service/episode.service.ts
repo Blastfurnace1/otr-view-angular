@@ -4,9 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
-import { Response } from './response';
-import { Episode } from './episode';
-import { EpisodeDataWrapper } from './episodedatawrapper';
+import { Response } from '../model/response';
+import { Episode } from '../model/episode';
+import { EpisodeDataWrapper } from '../model/episodedatawrapper';
 
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';

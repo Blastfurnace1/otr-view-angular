@@ -2,15 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { EpisodeService }  from '../episode.service';
+import { EpisodeService }  from '../service/episode.service';
 
-import { Series } from '../series';
+import { Series } from '../model/series';
 
-import { Episode } from '../episode';
-import { EpisodeSummary } from '../episodeSummary';
-import { Response } from '../response';
+import { Episode } from '../model/episode';
+import { EpisodeSummary } from '../model/episodeSummary';
+import { Response } from '../model/response';
 
-import { EpisodeDataWrapper } from '../episodedatawrapper';
+import { EpisodeDataWrapper } from '../model/episodedatawrapper';
 
 @Component({
   selector: 'app-episodes',
@@ -46,6 +46,10 @@ export class EpisodesComponent implements OnInit {
   
   bindEpisodeData(response:Response<EpisodeDataWrapper[]>) : void {
     this.episodes = response.payload;
+  }
+  
+  getMoreResults():void {
+    
   }
 
 }

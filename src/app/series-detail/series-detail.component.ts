@@ -2,13 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SeriesService }  from '../series.service';
+import { SeriesService }  from '../service/series.service';
 
-import { Series } from '../series';
-import { SeriesSummary } from '../seriesSummary';
-import { Response } from '../response';
+import { Series } from '../model/series';
+import { SeriesSummary } from '../model/seriesSummary';
+import { Response } from '../model/response';
 
-import { SeriesDataWrapper } from '../seriesdatawrapper';
+import { SeriesDataWrapper } from '../model/seriesdatawrapper';
 
 @Component({
   selector: 'app-series-detail',

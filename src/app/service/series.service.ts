@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
-import { Response } from './response';
-import { Series } from './series';
-import { SeriesDataWrapper } from './seriesdatawrapper';
+import { Response } from '../model/response';
+import { Series } from '../model/series';
+import { SeriesDataWrapper } from '../model/seriesdatawrapper';
 
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';

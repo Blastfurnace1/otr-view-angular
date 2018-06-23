@@ -11,9 +11,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { EpisodesComponent } from './episodes/episodes.component';
-import { DefaultPipe } from './default.pipe';
+import { DefaultPipe } from './pipes/default.pipe';
 import { AudioFilesComponent } from './audio-files/audio-files.component';
-import { EpisodeDetailComponent } from './dashboard/episode-detail/episode-detail.component';
+import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
 
 @NgModule({
   declarations: [
