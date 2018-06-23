@@ -1,0 +1,9 @@
+
+<ul class="episodes">
+  <li *ngFor="let episode of episodes" (click)="onSelect(episode)">
+    <span class="badge">{{ episode.episode.episodeNumber | default: 'XX' }}</span> <span>{{ episode.episode.title | default: 'No Title' }} {{ episode.episode.broadcastDate }} {{ episode.episode.exists }} {{ episode.episode.have }}</span> 
+    <BR><div class="audio" *ngIf="selectedEpisode === episode"><app-episode-detail></app-episode-detail></div>
+
+  </li>
+</ul>
+

@@ -4,6 +4,6 @@ import { SeriesSummary } from './seriessummary';
 
 export class SeriesDataWrapper {
   series: Series;
-  seriesSummary: SeriesSummary;
-  seriesAlias: SeriesAlias;
+  seriesSummary: SeriesSummary[];
+  seriesAlias: SeriesAlias[];
 }

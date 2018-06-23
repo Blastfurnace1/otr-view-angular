@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
+
 import { Response } from './response';
 import { Series } from './series';
 import { SeriesDataWrapper } from './seriesdatawrapper';
-import { QueryParams } from './queryparams';
 
-import { TEST_SERIES } from './mock-series';
+import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
+//import { TEST_SERIES } from './mock-series';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,14 +22,26 @@ const httpOptions = {
 })
 export class SeriesService {
   
-  private seriesUrl = 'http://localhost/otr-series-data/rest';
+  private network = 'http://';
+  private port = ':80';
+  private service = '/otr-series-data/rest';
+  
+  private seriesUrl = 'http://10.0.0.120/otr-series-data/rest';
   
   private resultSetSize = 20;
   
   private page = 1;
   
   constructor(private http: HttpClient,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private location:Location) { 
+  }
+  
+  
+  setUrl():void {
+    this.seriesUrl = this.network + location.hostname + this.port + this.service;
+    this.log(this.seriesUrl);
+  }
   
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
@@ -40,36 +54,17 @@ export class SeriesService {
     return headers;
   }
   
-  getMoreResults():Observable<Response<Series[]>[]> {
-    this.page++;
-    this.log(this.page.toString());
-    return this.getSeries(false);
-  }
-  
-  oldgetQueryParams(): HttpParams {
-    let params = new HttpParams();
-    params.set("page", this.page.toString());
-    params.set("size", this.resultSetSize.toString());
-    params.set("sort", "title");
-    params.set("sortAscending", "false");
-    params.set("joinAnd", "true");
-    return params;
-  }
-  
   getQueryParams(): string {
     let params = "?page=" + this.page.toString() +
     "&size=" + this.resultSetSize.toString() +
     "&sort=title" +
-    "&sortAscending=false" +
+    "&sortASC=true" +
     "&joinAnd=true";
     return params;
   }
   
-  getSeries(restart:boolean): Observable<Response<Series[]>[]> {
-    if (restart) {
-      this.page = 1;
-    }
-    let params = this.getQueryParams();
+  performLookup(params:string): Observable<Response<Series[]>[]> {
+    this.setUrl();
     let headers = this.getHeaders();
     this.log(this.seriesUrl+params);
     return this.http.get<Response<Series[]>[]>(this.seriesUrl+params, {headers:headers}).pipe(
@@ -78,7 +73,35 @@ export class SeriesService {
     );
   }
   
+  getSeries(restart:boolean): Observable<Response<Series[]>[]> {
+    if (restart) {
+      this.page = 1;
+    }
+    let params = this.getQueryParams();
+    return this.performLookup(params);
+  }
+  
+  /** GET Series whose title contains search term */
+  searchSeries (term: string): Observable<Response<Series[]>[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    let params = this.getQueryParams() + "&title=" + term;
+    return this.performLookup(params);
+  }
+  
+  getMoreResults(term:string):Observable<Response<Series[]>[]> {
+    this.page++;
+    this.log(this.page.toString());
+    if (term.length > 0) {
+      return this.searchSeries (term);
+    }
+    return this.getSeries(false);
+  }
+  
   getSer(id: number): Observable<Response<SeriesDataWrapper>> {
+    this.setUrl();
     const url = `${this.seriesUrl}/get/${id}`;
     return this.http.get<Response<SeriesDataWrapper>>(url).pipe(
       tap(_ => this.log(`fetched Series id=${id} using ` + url)),
@@ -108,6 +131,7 @@ export class SeriesService {
   
   /** PUT: update the hero on the server */
   updateSeries (series: Series): Observable<any> {
+    this.setUrl();
     return this.http.put(this.seriesUrl, series, httpOptions).pipe(
       tap(_ => this.log(`updated series id=${series.id}`)),
       catchError(this.handleError<any>('updateSeries'))
@@ -116,6 +140,7 @@ export class SeriesService {
     
     /** POST: add a new hero to the server */
   addSeries (series: Series): Observable<Series> {
+    this.setUrl();
     return this.http.post<Series>(this.seriesUrl, series, httpOptions).pipe(
       tap((series: Series) => this.log(`added Series w/ id=${series.id}`)),
       catchError(this.handleError<Series>('addSeries'))
@@ -124,6 +149,7 @@ export class SeriesService {
   
   /** DELETE: delete the hero from the server */
   deleteSeries (ser: Series | number): Observable<Series> {
+  this.setUrl();
   const id = typeof ser === 'number' ? ser : ser.id;
   const url = `${this.seriesUrl}/${id}`;
 
@@ -133,17 +159,7 @@ export class SeriesService {
   );
   }
     
-      /* GET heroes whose name contains search term */
-  searchSeries (term: string): Observable<Series[]> {
-  if (!term.trim()) {
-    // if not search term, return empty hero array.
-    return of([]);
-  }
-  return this.http.get<Series[]>(`${this.seriesUrl}/?title=${term}`).pipe(
-    tap(_ => this.log(`found series matching "${term}"`)),
-    catchError(this.handleError<Series[]>('searchSeries', []))
-  );
-}
+  
   
   // uses mock service
   

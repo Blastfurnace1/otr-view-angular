@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { SeriesService }  from '../series.service';
 
 import { Series } from '../series';
+import { SeriesSummary } from '../seriesSummary';
+import { Response } from '../response';
 
 import { SeriesDataWrapper } from '../seriesdatawrapper';
 
@@ -15,7 +17,8 @@ import { SeriesDataWrapper } from '../seriesdatawrapper';
 })
 export class SeriesDetailComponent implements OnInit {
 
-  @Input() seriesData: Series;
+  seriesData: Series;
+  seriesSummary: SeriesSummary[];
   
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +33,12 @@ export class SeriesDetailComponent implements OnInit {
   getSeries(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.seriesService.getSer(id)
-    .subscribe(seriesData => this.seriesData = seriesData.payload.series);
+    .subscribe(seriesData => this.bindSeriesData(seriesData));
+  }
+  
+  bindSeriesData(response:Response<SeriesDataWrapper>) : void {
+    this.seriesData = response.payload.series;
+    this.seriesSummary = response.payload.seriesSummary;
   }
   
   save(): void {

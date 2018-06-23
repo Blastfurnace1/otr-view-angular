@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeriesComponent } from './series.component';
+import { AudioFilesComponent } from './audio-files.component';
 
-describe('SeriesComponent', () => {
-  let component: SeriesComponent;
-  let fixture: ComponentFixture<SeriesComponent>;
+describe('AudioFilesComponent', () => {
+  let component: AudioFilesComponent;
+  let fixture: ComponentFixture<AudioFilesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeriesComponent ]
+      declarations: [ AudioFilesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SeriesComponent);
+    fixture = TestBed.createComponent(AudioFilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

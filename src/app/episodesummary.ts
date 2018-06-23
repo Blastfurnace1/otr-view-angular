@@ -1,0 +1,21 @@
+export class EpisodeSummary {
+  id:number;
+  seriesId:number;
+  episodeId:number;
+  summary:string;
+  number:number;
+  title:string;
+  broadcastDate:string;
+  length:string;
+  broadcaster:string;
+  sponsor:string;
+  afrsDisc:number;
+  referenceId:number;
+  afrsProgramName:string;
+  musicFills:number;
+  commercialsAddedLocally:number;
+  commercialsDeleted:number;
+  auditioned:number;
+  recordingDate:number;
+  recordingNotes:string;
+}

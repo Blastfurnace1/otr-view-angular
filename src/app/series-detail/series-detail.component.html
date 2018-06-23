@@ -1,16 +1,66 @@
 
-<button (click)="goBack()">go back</button>
-
 <div *ngIf="seriesData">
 
-  <h2>{{ seriesData.title | uppercase }} Details</h2>
-  <div><span>id: </span>{{seriesData.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="seriesData.title" placeholder="title"/>
-    </label>
-  </div>
+  <div style="text-align: center;"> <h2>{{ seriesData.title | uppercase }}</h2></div>
+  <img href="">
+  <table>
+  <thead>
+   <tr>
+   <th>
+   Genre: 
+   </th>
+  <th>
+  Run Dates:
+  </th>
+  <th>
+  Episode Count:
+  </th>
+  <th>
+  Country:
+  </th>
+  <th>
+  Broadcast Over:
+  </th>
+  <th>
+  Program Length:
+  </th>
+  </tr>
+  </thead>
+  <tbody>
+ 
+  <tr>
+  <td>
+  {{ seriesData.genre | default: 'No Genre Specified' }}
+  </td>
+  <td>
+  {{ seriesData.runDates | default: 'No Run Dates Given' }}
+  </td>
+  <td>
+  {{ seriesData.episodeCount | default: 'No Episode Count Given' }}
+  </td>
+  <td>
+  {{ seriesData.country | default: 'No Country Specified' }}
+  </td>
+  <td>
+  {{ seriesData.broadcastOver | default: 'No Network Specified' }}
+  </td>
+  <td>
+  {{ seriesData.programLength | default: 'No program Length Given' }}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  
+  <ul class="series">
+  <li *ngFor="let summary of seriesSummary">
+    <div class="module series">
+      <h4>{{summary.summary}}</h4>
+    </div>
+  </li>
+  </ul>
 
-	<button (click)="save()">save</button>
-	
+	 <h2>Episodes</h2>
+	<app-episodes [boundSeries]="seriesData"></app-episodes>
 </div>
+
+<button (click)="goBack()">go back</button>
