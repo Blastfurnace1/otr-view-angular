@@ -26,7 +26,11 @@ export class EpisodesComponent implements OnInit {
   selectedEpisode: EpisodeDataWrapper;
   
   onSelect(episode:EpisodeDataWrapper): void {
-    this.selectedEpisode = episode;
+    if (episode === this.selectedEpisode) {
+      this.selectedEpisode = null;
+    } else {
+      this.selectedEpisode = episode;
+    }
   }
   
   constructor(

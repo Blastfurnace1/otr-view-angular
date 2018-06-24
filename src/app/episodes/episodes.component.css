@@ -4,24 +4,25 @@
   padding: 2px;
   width: 40em;
 }
-.episodes li {
+.episodes li > ul {
   cursor: pointer;
   position: relative;
-  left: 0;
+  left: 0.5em;
   background-color: #EEE;
   margin: .5em;
   padding: .3em 0;
-  height: 1.6em;
   border-radius: 4px;
+  display: none; 
 }
-.episodes li.selected:hover {
+.episodes li.selected:hover > ul {
   background-color: #BBD8DC !important;
   color: white;
+  display: block;
 }
-.episodes li:hover {
+.episodes li:hover > ul {
   color: #607D8B;
   background-color: #DDD;
-  left: .1em;
+  display: block;
 }
 .episodes .text {
   position: relative;
@@ -41,17 +42,12 @@
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-.episodes li ul {
-    display: none;
-}
-.episodes li.hover ul {
-    display: block;
-}
 
 .episodes .title {
 	position: right;
 }
 
-div {
+.more {
+	text-align: center;
 	width: 50%;
 }
