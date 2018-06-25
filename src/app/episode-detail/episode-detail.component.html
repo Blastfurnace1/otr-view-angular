@@ -1,5 +1,11 @@
-<ul>
-<li>this</li>
-<li>that</li>
-<li>the other</li>
+
+<ul class="audioFiles">
+  <li *ngFor="let audio of audioFiles" (click)="onSelect(audio)">
+    <span class="badge">{{ audio.id | default: 'XX' }}</span> <audio id='otrPlayer' controls src='/otr-file-services/FileServer?id={{audio.id}}'> Your browser does not support the <code>audio</code> element.  </audio> {{ audio.filename | default: 'No fileName' }} 
+  </li>
 </ul>
+
+<BR><BR>
+<span class="more">
+<button (click)="getMoreResults()">MORE</button>
+</span>

@@ -73,35 +73,22 @@ export class EpisodeService {
     if (restart) {
       this.page = 1;
     }
-    let params = this.getQueryParams() + "&seriesId=" + seriesId.toString;
+    let params = this.getQueryParams() + "&seriesId=" + seriesId;
     return this.performLookup(params);
   }
   
-  getSeriesEpisodes(seriesId:number): Observable<Response<EpisodeDataWrapper[]>> {
-    this.setUrl();
-    const url = `${this.episodeUrl}/series/episodes/${seriesId}`;
-    return this.http.get<Response<EpisodeDataWrapper[]>>(url).pipe(
-      tap(_ => this.log(`fetched Episodes for Series id=${seriesId} using ` + url)),
-      catchError(this.handleError<Response<EpisodeDataWrapper[]>>(`getEpisodes for Series id=${seriesId} using ` + url))
-    );
-  }
+  
     
   /** GET Episode whose title contains search term */
-  searchEpisode (seriesId:number, term: string): Observable<Response<Episode[]>[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    let params = this.getQueryParams() + "&seriesId=" + seriesId.toString + "&title=" + term;
+  getEpisodesBySeries (seriesId:number): Observable<Response<Episode[]>[]> {
+    
+    let params = this.getQueryParams() + "&seriesId=" + seriesId;
     return this.performLookup(params);
   }
   
-  getMoreResults(seriesId:number, term:string):Observable<Response<Episode[]>[]> {
+  getMoreResults(seriesId:number):Observable<Response<Episode[]>[]> {
     this.page++;
     this.log(this.page.toString());
-    if (term.length > 0) {
-      return this.searchEpisode (seriesId, term);
-    }
     return this.getEpisodes(seriesId, false);
   }
   

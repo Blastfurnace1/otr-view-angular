@@ -15,12 +15,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AudiofileService {
+export class AudioFileService {
 private network = 'http://';
   private port = ':80';
-  private service = '/otr-episode-data/rest';
+  private service = '/otr-audio-data/rest';
   
-  private episodeUrl = 'http://10.0.0.120/otr-episode-data/rest';
+  private episodeUrl = 'http://10.0.0.120/otr-audio-data/rest';
   
   private resultSetSize = 20;
   
@@ -51,7 +51,7 @@ private network = 'http://';
   getQueryParams(): string {
     let params = "?page=" + this.page.toString() +
     "&size=" + this.resultSetSize.toString() +
-    "&sort=title" +
+    "&sort=filename" +
     "&sortASC=true" +
     "&joinAnd=true";
     return params;
@@ -71,7 +71,7 @@ private network = 'http://';
     if (restart) {
       this.page = 1;
     }
-    let params = this.getQueryParams() + "&episodeId=" + episodeId.toString;
+    let params = this.getQueryParams() + "&episodeId=" + episodeId;
     return this.performLookup(params);
   }
   
@@ -94,16 +94,13 @@ private network = 'http://';
     return this.performLookup(params);
   }
   
-  getMoreResults(seriesId:number, term:string):Observable<Response<AudioFile[]>[]> {
+  getMoreResults(seriesId:number):Observable<Response<AudioFile[]>[]> {
     this.page++;
     this.log(this.page.toString());
-    if (term.length > 0) {
-      return this.searchEpisode (seriesId, term);
-    }
     return this.getAudioFiles(seriesId, false);
   }
   
-  getEpisode(id: number): Observable<Response<AudioFile>> {
+  getAudioFile(id: number): Observable<Response<AudioFile>> {
     this.setUrl();
     const url = `${this.episodeUrl}/get/${id}`;
     return this.http.get<Response<AudioFile>>(url).pipe(

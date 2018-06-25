@@ -1,3 +1,152 @@
-<p>
-  audio-files works!
-</p>
+  <h4>{{otrItem.filename}}</h4>
+    <h5>Series: {{otrItem.seriesName}} Title: {{otrItem.episodeName}} Episode: {{otrItem.episodeNumber}} Broadcast: {{otrItem.broadcastDate}}</h5>
+    <div  id="otrPlayerDiv" >
+    <audio id='otrPlayer' controls src='/otr-file-services/FileServer?id={{otrItem.id}}'> Your browser does not support the <code>audio</code> element.  </audio>
+	</div>
+	<BR>
+	<legend>Recording information:</legend>
+    <form id="reg" >
+       
+      
+           <table  class="simpletablestyle"> 
+            <tbody>
+             <tr > 
+            <td>
+                File Name: {{otrItem.filename}}
+               
+            </td>
+            <td>
+                Series Name: {{otrItem.seriesName}}
+               
+            </td>
+            </tr>
+           
+            <tr>
+            <td>
+                Episode Name: {{otrItem.episodeName}}
+            </td>
+            <td>
+                Description: {{otrItem.description}}
+            </td>
+            </tr>
+            
+            <tr>
+            <td>
+                Title: {{otrItem.title}}
+            </td>
+            <td>
+                Genre: {{otrItem.genre}}
+            </td>
+            </tr>
+            
+            
+            <tr>
+            <td>
+                Track No: {{otrItem.trackNo}}
+            </td>
+            <td>
+                Year: {{otrItem.year}}
+            </td>
+            </tr>
+
+			<tr>
+			<td>
+                Album: {{otrItem.album}}
+            </td>
+            <td>
+                Artist: {{otrItem.artist}}
+            </td>
+            </tr>
+         	<tr rowspan="4">
+         	<td colspan="2">
+                Comment: {{otrItem.comment}}
+            </td>
+            </tr>
+            
+            
+			</tbody>
+
+           
+        </table>
+        <BR>
+             <table  class="simpletablestyle">
+         <thead>
+            <tr>
+                <th>Source Id</th>
+				<th>Rating</th>
+				<th>Heard</th>
+ 				<th>Audio Quality</th>
+  				<th>Encoding Quality</th>
+  				<th>Media Id</th>
+                <th>Indexed</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{otrItem.sourceId}}</td>
+ 			<td><{{otrItem.rating }}</td>
+  			<td>{{otrItem.heard}}</td>
+  			<td>{{otrItem.audioQuality}}</td>
+       		<td>{{otrItem.encodingQuality}}</td>       
+       		<td>{{otrItem.mediaId}}</td>
+            <td>{{otrItem.indexed}}</td>
+         </tr>
+      </table>
+      <BR>
+      <BR>
+      
+        </form>
+         <table  class="simpletablestyle">
+         <thead>
+            <tr>
+                <th>Directory</th>
+                <th>Type</th>
+                <th>Audio File</th>
+                <th>Bit Rate</th>
+                <th>Sampling Rate</th>
+                <th>Channels</th>
+                <th>Encoding Type</th>
+				<th>Encoding Info</th>
+				<th>VBR</th>
+                <th>Duration</th>
+                <th>Precise Duration</th>
+                <th>File Length</th>
+               
+            </tr>
+        </thead>
+        <tr>
+      
+            <td>{{otrItem.directory}}</td>
+            <td>{{otrItem.fileType}}</td>
+            <td>{{otrItem.audioFile}}</td>
+            <td>{{otrItem.bitrate}}</td>
+            <td>{{otrItem.audioSamplingRate}}</td>
+            <td>{{otrItem.audioChannels}}</td>
+            <td>{{otrItem.encodingType}}</td>
+            <td>{{otrItem.extraEncodeInfo}}</td>
+            <td>{{otrItem.variableBitrate}}</td>
+            <td>{{otrItem.duration}}</td>
+            <td>{{otrItem.preciseDuration}}</td>
+            <td>{{otrItem.fileLength}}</td>
+            </tr>
+    </table>
+    
+    <BR>
+    <H2>Raw Data Links</H2>
+     <table  class="simpletablestyle">
+         <thead>
+            <tr>
+                <th>Id</th>
+                <th>Series Id</th>
+                <th>Episode Id</th>
+
+          
+            </tr>
+        </thead>
+        <tr>
+            <td><a href="/otr-audio-data/rest/get/{{otrItem.id}}" target="_blank">{{otrItem.id}}</a></td>
+            <td><a href="/otr-series-data/rest/get/{{otrItem.seriesId}}" target="_blank">{{otrItem.seriesId}}</a></td>
+            <td><a href="/otr-episode-data/rest/get/{{otrItem.episodeId}}" target="_blank">{{otrItem.episodeId}}</a></td>
+            
+        </tr>
+    </table>
+			

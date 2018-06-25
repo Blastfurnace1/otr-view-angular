@@ -21,7 +21,7 @@ export class EpisodesComponent implements OnInit {
 
   @Input() boundSeries: Series;
   
-  episodes: EpisodeDataWrapper[];
+  episodes: Episode[];
   
   selectedEpisode: EpisodeDataWrapper;
   
@@ -44,16 +44,20 @@ export class EpisodesComponent implements OnInit {
   }
 
   getEpisodes(): void {
-    this.episodeService.getSeriesEpisodes(this.boundSeries.id)
-    .subscribe(episodeData => this.bindEpisodeData(episodeData));
+    this.episodeService.getEpisodes(this.boundSeries.id,false)
+    .subscribe(episodeData => this.bindEpisodeData(episodeData[0], false));
   }
   
-  bindEpisodeData(response:Response<EpisodeDataWrapper[]>) : void {
-    this.episodes = response.payload;
+  getMoreResults(): void {
+      this.episodeService.getMoreResults(this.boundSeries.id).subscribe(episodeData => this.bindEpisodeData(episodeData[0], true));
   }
   
-  getMoreResults():void {
-    
+  bindEpisodeData(response:Response<Episode[]>, add:boolean) : void {
+    if (add) {
+        this.episodes =  this.episodes.concat(response.payload);
+    } else {
+        this.episodes = response.payload;
+    }
   }
 
 }

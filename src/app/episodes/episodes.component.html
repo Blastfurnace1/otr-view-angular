@@ -1,10 +1,11 @@
-<div id="nav">
+<div id="nav" *ngIf="episodes.length > 0">
 <ul class="episodes">
   <li *ngFor="let episode of episodes" (click)="onSelect(episode)">
-    <span class="badge">{{ episode.episode.episodeNumber | default: 'XX' }}</span> {{ episode.episode.title | default: 'No Title' }} <span class="title">Broadcast: {{ episode.episode.broadcastDate | default: 'XX/XX/XX' }} Exists: {{ episode.episode.exists }} Have: {{ episode.episode.have }}</span> 
-  	<app-episode-detail *ngIf="selectedEpisode === episode"></app-episode-detail>
+    <span class="badge">{{ episode.episodeNumber | default: 'XX' }}</span> {{ episode.title | default: 'No Title' }} <span class="title">Broadcast: {{ episode.broadcastDate | default: 'XX/XX/XX' }} Exists: {{ episode.exists }} Have: {{ episode.have }}</span> 
+  	<app-episode-detail *ngIf="selectedEpisode === episode" [boundEpisode]="episode"></app-episode-detail>
   </li>
 </ul>
+</div>
 <BR><BR>
 <div class="more">
 <button (click)="getMoreResults()">MORE</button>
