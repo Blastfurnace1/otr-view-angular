@@ -7,6 +7,7 @@ import { AudioFileService }  from '../service/audiofile.service';
 import { Episode } from '../model/episode';
 import { AudioFile } from '../model/audiofile';
 import { Response } from '../model/response';
+import { PayloadWithCount } from '../model/payloadwithcount';
 
 @Component({
   selector: 'app-episode-detail',
@@ -48,11 +49,11 @@ export class EpisodeDetailComponent implements OnInit {
       this.audioFileService.getMoreResults(this.boundEpisode.id).subscribe(audioFileData => this.bindAudioFileData(audioFileData[0], true));
   }
   
-  bindAudioFileData(response:Response<AudioFile[]>, add:boolean) : void {
+  bindAudioFileData(response:Response<PayloadWithCount<AudioFile[]>>, add:boolean) : void {
     if (add) {
-        this.audioFiles =  this.audioFiles.concat(response.payload);
+        this.audioFiles =  this.audioFiles.concat(response.payload.payload);
     } else {
-        this.audioFiles = response.payload;
+        this.audioFiles = response.payload.payload;
     }
   }
   

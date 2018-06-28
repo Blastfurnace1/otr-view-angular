@@ -1,4 +1,7 @@
     /* DashboardComponent's private CSS styles */
+    body {
+    	background-image: url('/dashboard/enter.JPG');
+    }
      .search-result li {
       border-bottom: 1px solid gray;
       border-left: 1px solid gray;

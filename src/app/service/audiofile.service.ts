@@ -6,6 +6,7 @@ import { MessageService } from './message.service';
 
 import { Response } from '../model/response';
 import { AudioFile } from '../model/audiofile';
+import { PayloadWithCount } from '../model/payloadwithcount';
 
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
@@ -57,17 +58,17 @@ private network = 'http://';
     return params;
   }
   
-  performLookup(params:string): Observable<Response<AudioFile[]>[]> {
+  performLookup(params:string): Observable<Response<PayloadWithCount<AudioFile[]>>[]> {
     this.setUrl();
     let headers = this.getHeaders();
     this.log(this.episodeUrl+params);
-    return this.http.get<Response<AudioFile[]>[]>(this.episodeUrl+params, {headers:headers}).pipe(
+    return this.http.get<Response<PayloadWithCount<AudioFile[]>>[]>(this.episodeUrl+params, {headers:headers}).pipe(
       tap(episode => this.log(`fetched audio files`)),
       catchError(this.handleError('get audio files', []))
     );
   }
   
-  getAudioFiles(episodeId:number, restart:boolean): Observable<Response<AudioFile[]>[]> {
+  getAudioFiles(episodeId:number, restart:boolean): Observable<Response<PayloadWithCount<AudioFile[]>>[]> {
     if (restart) {
       this.page = 1;
     }
@@ -85,7 +86,7 @@ private network = 'http://';
   }
     
   /** GET Episode whose title contains search term */
-  searchEpisode (seriesId:number, term: string): Observable<Response<AudioFile[]>[]> {
+  searchEpisode (seriesId:number, term: string): Observable<Response<PayloadWithCount<AudioFile[]>>[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
@@ -94,7 +95,7 @@ private network = 'http://';
     return this.performLookup(params);
   }
   
-  getMoreResults(seriesId:number):Observable<Response<AudioFile[]>[]> {
+  getMoreResults(seriesId:number):Observable<Response<PayloadWithCount<AudioFile[]>>[]> {
     this.page++;
     this.log(this.page.toString());
     return this.getAudioFiles(seriesId, false);

@@ -53,7 +53,7 @@ export class EpisodeService {
   getQueryParams(): string {
     let params = "?page=" + this.page.toString() +
     "&size=" + this.resultSetSize.toString() +
-    "&sort=title" +
+    "&sort=episodeNumber" +
     "&sortASC=true" +
     "&joinAnd=true";
     return params;
