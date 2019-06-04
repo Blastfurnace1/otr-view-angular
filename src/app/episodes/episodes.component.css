@@ -4,26 +4,7 @@
   padding: 2px;
   width: 80%;
 }
-.episodes li > ul {
-  cursor: pointer;
-  position: relative;
-  left: 0.5em;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  border-radius: 4px;
-  display: none; 
-}
-.episodes li.selected:hover > ul {
-  background-color: #BBD8DC !important;
-  color: white;
-  display: block;
-}
-.episodes li:hover > ul {
-  color: #607D8B;
-  background-color: #DDD;
-  display: block;
-}
+
 .episodes .text {
   position: relative;
   top: -3px;
@@ -33,7 +14,7 @@
   font-size: small;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
+  background-color: #004080;
   line-height: 1em;
   position: relative;
   left: -1px;

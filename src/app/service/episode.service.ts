@@ -20,9 +20,9 @@ export class EpisodeService {
 
  private network = 'http://';
   private port = ':80';
-  private service = '/otr-episode-data/rest';
+  private service = '/Monolith/rest/episode';
   
-  private episodeUrl = 'http://10.0.0.120/otr-episode-data/rest';
+  private episodeUrl = 'http://10.0.0.120/Monolith/rest/episode';
   
   private resultSetSize = 20;
   

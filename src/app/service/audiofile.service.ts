@@ -19,9 +19,9 @@ const httpOptions = {
 export class AudioFileService {
 private network = 'http://';
   private port = ':80';
-  private service = '/otr-audio-data/rest';
+  private service = '/Monolith/rest/audio';
   
-  private episodeUrl = 'http://10.0.0.120/otr-audio-data/rest';
+  private episodeUrl = 'http://10.0.0.120/Monolith/rest/audio';
   
   private resultSetSize = 20;
   

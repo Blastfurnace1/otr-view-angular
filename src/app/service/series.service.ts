@@ -24,9 +24,9 @@ export class SeriesService {
   
   private network = 'http://';
   private port = ':80';
-  private service = '/otr-series-data/rest';
+  private service = '/Monolith/rest/series';
   
-  private seriesUrl = 'http://10.0.0.120/otr-series-data/rest';
+  private seriesUrl = 'http://10.0.0.120/Monolith/rest/series';
   
   private resultSetSize = 20;
   

@@ -1,7 +1,11 @@
 
-<ul class="audioFiles">
+<ul data-role="listview" class="audioFiles">
   <li *ngFor="let audio of audioFiles" (click)="onSelect(audio)">
-    <span class="badge">{{ audio.id | default: 'XX' }}</span> <audio id='otrPlayer' controls src='/otr-file-services/FileServer?id={{audio.id}}'> Your browser does not support the <code>audio</code> element.  </audio> {{ audio.filename | default: 'No fileName' }} 
+    <span class="badge">{{ audio.id | default: 'XX' }}</span> <audio preload="none" id='otrPlayer' controls src='http://localhost/Monolith/FileServer?id={{audio.id}}'> Your browser does not support the <code>audio</code> element.  </audio> {{ audio.filename | default: 'No fileName' }} <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
   </li>
 </ul>
 

@@ -11,7 +11,4 @@ export class Series {
   programLength: string;
   indexed: number;
   searchTitle: string;
-  goldinPageRef: string;
-  salmonsonPageRef: string;
-  jerryPageRef: string;
 }
